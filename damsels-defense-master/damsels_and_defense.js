@@ -1,24 +1,31 @@
 var button;
 var canvas;
-var vid;
-var princess;
+var vid1, vid2, vid3, vid4;
+var punching, success, fail;
+var bad_guy, bad_guy_crying;
+
+function preload(){
+  punching = loadAnimation("punch1.png", "punch2.png", "punch3.png");
+  success = loadAnimation("cheer.png", "cheer 2.png");
+  fail = loadAnimation("cry1.png","cry2.png");
+  bad_guy = loadAnimation("Bad guy 1.png", "Bad guy 2.png");
+}
+
 
 function setup(){
   canvas = createCanvas(1345,640);
-  background(45);
+  background('#222222');
   canvas.class("lemon");
 
+  animation(punching,800,100);
   title = "Damsels & Defense";
  	textFont("VT323");
   textSize(80);
   fill(255,255,255);
-  text(title, 450, 321);
-
-  princess = createSprite(400, 150, 50, 100);
-  var punching = princess.addAnimation("punch1.png", "punch2.png", "punch3.png");
+  text(title, 400, 321);
 
   button = createButton("Play");
-	button.position(677,400);
+	button.position(610,400);
   button.size(100,40);
 	button.mousePressed(stats);
   // sound = loadSound("damsels_and_defense_music.mp3");
@@ -44,7 +51,7 @@ function stats(){
   button2.mousePressed(stats2);
 
   // console.log("got to the function");
-  background(45);
+  background('#222222');
   fill(255,218,185);
   rect(30, 40, 1277, 571);
 
@@ -62,81 +69,27 @@ function stats2(){
   button3 = createButton("-->")
   button3.position(1200,570);
   button3.size(100,40);
-  button3.mousePressed(stats3);
+  button3.mousePressed(lesson1);
 
-  background(45);
+  background('#222222');
   fill(255,218,185);
   rect(30, 40, 1277, 571);
 
-  info2 = " However, only 6 out of every \n 1000 perpetrators end in jail."
+  info2 = "In these assaults, 90% of \n the victims tend to be female while \n the other 10% is male."
   textAlign("center")
   fill(0,0,0);
   text(info2,650, 230);
   }
 
-function stats3(){
+function lesson1(){
   button3.hide();
 
   button4 = createButton("-->")
   button4.position(1200,570);
   button4.size(100,40);
-  button4.mousePressed(stats4);
+  button4.mousePressed(game1);
 
-  background(45);
-  fill(255,218,185);
-  rect(30, 40, 1277, 571);
-
-  info3 = " In these assaults, 90% of \n the victims tend to be female while \n the other 10% is male."
-  textAlign("center");
-  fill(0,0,0);
-  text(info3,650, 230);
-}
-
-function stats4(){
-  button4.hide();
-
-  button5 = createButton("-->")
-  button5.position(1200,570);
-  button5.size(100,40);
-  button5.mousePressed(stats5);
-
-  background(45);
-  fill(255,218,185);
-  rect(30, 40, 1277, 571);
-
-  info4 = " Statistics have shown that \n about 55% of the time, these assaults \n happened either at or near the \n victim's house."
-  textAlign("center");
-  fill(0,0,0);
-  text(info4,650, 170);
-}
-
-function stats5(){
-  button5.hide();
-
-  button6 = createButton("-->")
-  button6.position(1200,570);
-  button6.size(100,40);
-  button6.mousePressed(lesson1);
-
-  background(45);
-  fill(255,218,185);
-  rect(30, 40, 1277, 571);
-
-  info5 = " Lastly, one of the most \n under-reported crime is rape as over \n 63% sexual assaults are not \n reported to the police."
-  textAlign("center");
-  fill(0,0,0);
-  text(info5,650, 170);
-}
-
-function lesson1(){
-  button6.hide();
-
-  button7 = createButton("-->")
-  button7.position(1200,570);
-  button7.size(100,40);
-  button7.mousePressed(game1);
-
-  background(45);
+  background('#222222');
   fill(255,218,185);
   rect(30, 40, 1277, 571);
   title1 = "Lesson 1"
@@ -144,20 +97,24 @@ function lesson1(){
   fill(0,0,0);
   text(title1,660, 120);
 
-  vid = createVideo ("lesson1.mp4");
-  vid.volume(0);
-  vid.size(700, 600);
-  vid.position(320,75);
+  vid1 = createVideo ("lesson1.mp4");
+  vid1.volume(0);
+  vid1.size(700, 600);
+  vid1.position(320,75);
 
-  vid.loop();
+  vid1.loop();
 }
 
 function game1 (){
-  button7.hide()
-  vid.hide()
-  background(45);
+  button4.hide()
+  vid1.hide()
+  background('#222222');
   fill(255,218,185);
   rect(30, 40, 1277, 571);
+
+  button5 = createButton("-->")
+  button5.position(1200,570);
+  button5.size(100,40);
 
   title2 = "Lesson 1 Game"
   textAlign("center");
@@ -198,6 +155,7 @@ function game1 (){
   sel1.option('3');
   sel1.option('4');
 
+
   sel2 = createSelect();
   sel2.position(500, 380);
   sel2.option('1');
@@ -219,8 +177,80 @@ function game1 (){
   sel4.option('3');
   sel4.option('4');
 
-  sel1.changed(myselect);
-  sel2.changed(myselect);
-  sel3.changed(myselect);
-  sel4.changed(myselect);
+   sel1.changed(mySelectEvent1);
+   sel2.changed(mySelectEvent1);
+   sel3.changed(mySelectEvent1);
+   sel4.changed(mySelectEvent1);
+
+function mySelectEvent1(){
+  var step1 = sel1.value();
+  var step2 = sel2.value();
+  var step3 = sel3.value();
+  var step4 = sel4.value();
+
+  if (step1 == 2 && step2 ==3 && step3 ==4 && step4 ==1){
+      button5.mousePressed(success1);
+  }
+  else {
+      button5.mousePressed(failure1);
+    }
+  }
+}
+
+function success1() {
+  button5.hide();
+  sel1.hide();
+  sel2.hide();
+  sel3.hide();
+  sel4.hide();
+
+  button6 = createButton("-->")
+  button6.position(1200,570);
+  button6.size(100,40);
+  button6.mousePressed(lesson2);
+
+  background('#222222');
+  fill(255,218,185);
+  rect(30, 40, 1277, 571);
+
+  text1 = "success"
+  textSize(30);
+  fill(0,0,0);
+  text(text1,740, 520);
+}
+
+function failure1() {
+  button5.hide();
+  sel1.hide();
+  sel2.hide();
+  sel3.hide();
+  sel4.hide();
+
+  button6 = createButton("-->")
+  button6.position(1200,570);
+  button6.size(100,40);
+  button6.mousePressed(lesson2);
+
+  background('#222222');
+  fill(255,218,185);
+  rect(30, 40, 1277, 571);
+
+  text2 = "fail"
+  textSize(30);
+  fill(0,0,0);
+  text(text2,740, 520);
+
+}
+
+function lesson2(){
+  button6.hide();
+
+  background('#222222');
+  fill(255,218,185);
+  rect(30, 40, 1277, 571);
+
+  title3= "Lesson 2"
+  textAlign("center");
+  fill(0,0,0);
+  text(title3,660, 120);
 }
