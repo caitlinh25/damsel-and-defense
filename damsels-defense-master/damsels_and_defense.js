@@ -2,52 +2,84 @@ var button;
 var canvas;
 var character;
 var vid1, vid2, vid3, vid4;
+var song;
+var punch_createimg;
+var cheer_createimg;
+var cry_createimg;
+var punch_loadimg, cheer_loadimg, cry_loadimg;
+var bad1_createimg;
+var bad1_loadimg;
+var bad2_createimg;
+var bad2_loadimg;
+
+function preload(){
+
+  punch_loadimg = loadImage("punch.gif");
+  cheer_loadimg = loadImage("cheer.gif");
+  cry_loadimg = loadImage("cry.gif");
+  bad1_loadimg = loadImage("Bad guy 1.png");
+  bad2_loadimg = loadImage("Bad guy 2.png");
+
+  punch_createimg = createImg("punch.gif");
+  cheer_createimg = createImg("cheer.gif");
+  cry_createimg = createImg("cry.gif");
+  bad1_createimg = createImg("Bad guy 1.png");
+  bad2_createimg = createImg("Bad guy 2.png");
+
+  // image(cry_createimg,0,0);
+
+  song = loadSound('Roar.mp3');
+  vid1 = createVideo ("lesson1.mp4");
+  vid2 = createVideo ("lesson2.mp4");
+  vid3 = createVideo ("lesson3.mp4");
+  vid4 = createVideo ("lesson4.mp4");
+}
 
 function setup(){
   createCanvas(1345,640);
   background('#222222');
-  // canvas.class("lemon");
 
-  title = "Damsels & Defense";
+  punch_createimg.position(350,250);
+  cheer_createimg.position(400,200);
+  cry_createimg.position(590,200);
+  bad1_createimg.position(600,200);
+  bad2_createimg.position(700,300);
+
+  cheer_createimg.hide();
+  cry_createimg.hide();
+  bad1_createimg.hide();
+  bad2_createimg.hide();
+
+  song.loop();
+
+  vid1.hide();
+  vid1.volume(0);
+
+  vid2.hide();
+  vid2.volume(0);
+
+  vid3.hide();
+  vid3.volume(0);
+
+  vid4.hide();
+  vid4.volume(0);
+
+  title = "Damsels\n&\nDefense";
+  textAlign("center");
  	textFont("VT323");
   textSize(80);
   fill(255,255,255);
-  text(title, 400, 321);
+  text(title, 650, 250);
 
   button = createButton("Play");
-	button.position(610,400);
+	button.position(610,500);
   button.size(100,40);
 	button.mousePressed(stats);
-  // sound = loadSound("damsels_and_defense_music.mp3");
-  // sound.loop();
-
-  character = createSprite(650,150,100,400);
-  frameRate(10);
-  character.addAnimation("punching", "punch1.png", "punch2.png", "punch3.png");
-  frameRate(10);
-  character.addAnimation("success", "cheer.png", "cheer 2.png");
-  frameRate(10);
-  character.addAnimation("bad_guy", "Bad guy 1.png", "Bad guy 2.png");
-  frameRate(10);
-  character.addAnimation("fail", "cry1.png","cry2.png");
 }
-
-function draw(){
-  drawSprites();
-  character.changeAnimation("punching");
-// function loaded(){
-// 	song.play();
-}
-//
-// function draw(){ss
-// //   	sound.setVolume(0.1);
-
-//
-
 
 function stats(){
   button.hide();
-  character.remove();
+  punch_createimg.hide();
 
   button2 = createButton("-->")
   button2.position(1200,570);
@@ -66,6 +98,9 @@ function stats(){
   text(info1,650, 230);
 }
 
+function draw(){
+
+}
 
 function stats2(){
   button2.hide();
@@ -101,7 +136,7 @@ function lesson1(){
   fill(0,0,0);
   text(title1,660, 120);
 
-  vid1 = createVideo ("lesson1.mp4");
+  vid1.show();
   vid1.volume(0);
   vid1.size(700, 600);
   vid1.position(320,75);
@@ -216,9 +251,14 @@ function success1() {
   background('#222222');
   fill(255,218,185);
 
-  drawSprites();
-  character();
-  charcter.changeAnimation("success");
+  success_title = "You have succeeded"
+  textSize(100);
+  text(success_title,650,100);
+
+  cry_createimg.hide();
+  bad2_createimg.show();
+  cheer_createimg.show();
+
 
 }
 
@@ -235,16 +275,23 @@ function failure1() {
   button6.mousePressed(lesson2);
 
   background('#222222');
-  fill(255,218,185);
 
-  drawSprites();
-  charcter.show();
-  charcter.changeAnimation("fail");
+  fail_title = "You Failed"
+  textSize(80);
+  fill(255,218,185);
+  text(fail_title,650,100);
+
+  cry_createimg.show();
+  // image(cry_createimg,0,height/2, cry_createimg.width*2, cry_createimg.height*2);
+
 
 }
 
 function lesson2(){
   button6.hide();
+  cheer_createimg.hide();
+  bad2_createimg.hide();
+  cry_createimg.hide();
 
   button7 = createButton("-->")
   button7.position(1200,570);
@@ -255,12 +302,14 @@ function lesson2(){
   fill(255,218,185);
   rect(30, 40, 1277, 571);
 
-  title3= "Lesson 2"
+  title4 = "Lesson 2"
+  textSize(60);
   textAlign("center");
   fill(0,0,0);
-  text(title3,660, 120);
+  text(title4,660, 120);
 
-  vid2 = createVideo ("lesson2.mp4");
+
+  vid2.show();
   vid2.volume(0);
   vid2.size(700, 600);
   vid2.position(320,75);
@@ -268,108 +317,114 @@ function lesson2(){
   vid2.loop();
 
   }
+function game2(){
+  vid2.hide();
+  button7.hide();
 
-  function game2 (){
-    button7.hide();
-    vid2.hide();
+  button8 = createButton("-->")
+  button8.position(1200,570);
+  button8.size(100,40);
 
-    background('#222222');
-    fill(255,218,185);
-    rect(30, 40, 1277, 571);
+  background('#222222');
+  fill(255,218,185);
+  rect(30, 40, 1277, 571);
 
-    button8 = createButton("-->")
-    button8.position(1200,570);
-    button8.size(100,40);
+  title5 = "Lesson 2 Game"
+  textSize(60);
+  textAlign("center");
+  fill(0,0,0);
+  text(title5,660, 120);
 
-    title4 = "Lesson 2 Game"
-    textAlign("center");
-    fill(0,0,0);
-    text(title4,660, 120);
+  scenario2 = "You are standing very close to an alleyway, waiting for your friend. \n Someone suddenly grabs you from behind, wrapping their arms around \n you violently. Put the steps in order to escape the attacker's hold. "
+  textAlign("center");
+  textStyle("normal");
+  textSize(30);
+  fill(0,0,0);
+  text(scenario2,660,165);
 
-    scenario2 = "You are standing very close to an alleyway, waiting for your friend. /n Someone suddenly grabs you from behind, wrapping their arms around you violently. /n Put the steps in order to escape the attacker's hold. "
-    textAlign("center");
-    textSize(30);
-    fill(0,0,0);
-    text(scenario2,660,165);
+  option5 = "shift hips to one side"
+  textSize(30);
+  textStyle("normal");
+  fill(0,0,0);
+  text(option5,750,280);
 
-    option5 = "shift hips to one side"
-    textSize(30);
-    fill(0,0,0);
-    text(option5,750,290);
+  option6 = "when attacker lets go, turn around \n and interlock your hands behind the \n attacker's neck"
+  textSize(30);
+  textStyle("normal");
+  fill(0,0,0);
+  text(option6,750, 315);
 
-    option6 = "when attacker lets go, turn around and interlock your hands behind the attacker's neck"
-    textSize(30);
-    fill(0,0,0);
-    text(option6,750, 380);
+  option7 = "with your knee, kick the\n attacker's groin"
+  textSize(30);
+  textStyle("normal");
+  fill(0,0,0);
+  text(option7,750, 430);
 
-    option7 = "with your knee, kick the attacker's groin"
-    textSize(30);
-    fill(0,0,0);
-    text(option7,750, 470);
+  option8 = "hold the attacker's arms and \n contract your body"
+  textSize(30);
+  textStyle("normal");
+  fill(0,0,0);
+  text(option8,740, 510);
 
-    option8 = "hold the attacker's arms and contract your body"
-    textSize(30);
-    fill(0,0,0);
-    text(option8,740, 520);
-
-    option9 = "make a fist and strike the attacker's groin"
-    textSize(30);
-    fill(0,0,0);
-    text(option9,740, 520);
+  option9 = "make a fist and strike the attacker's groin"
+  textSize(30);
+  textStyle("normal");
+  fill(0,0,0);
+  text(option9,775, 590);
 
 
-    sel5 = createSelect();
-    sel5.position(500, 290);
-    sel5.option('1');
-    sel5.option('2');
-    sel5.option('3');
-    sel5.option('4');
-    sel5.option('5');
+  sel5 = createSelect();
+  sel5.position(430,275);
+  sel5.option('1');
+  sel5.option('2');
+  sel5.option('3');
+  sel5.option('4');
+  sel5.option('5');
 
-    sel6 = createSelect();
-    sel6.position(500, 380);
-    sel6.option('1');
-    sel6.option('2');
-    sel6.option('3');
-    sel6.option('4');
-    sel6.option('5');
+  sel6 = createSelect();
+  sel6.position(430, 345);
+  sel6.option('1');
+  sel6.option('2');
+  sel6.option('3');
+  sel6.option('4');
+  sel6.option('5');
 
-    sel7 = createSelect();
-    sel7.position(500, 450);
-    sel7.option('1');
-    sel7.option('2');
-    sel7.option('3');
-    sel7.option('4');
-    sel7.option('5');
+  sel7 = createSelect();
+  sel7.position(430, 425);
+  sel7.option('1');
+  sel7.option('2');
+  sel7.option('3');
+  sel7.option('4');
+  sel7.option('5');
 
-    sel8 = createSelect();
-    sel8.position(500, 520);
-    sel8.option('1');
-    sel8.option('2');
-    sel8.option('3');
-    sel8.option('4');
-    sel8.option('5');
+  sel8 = createSelect();
+  sel8.position(430, 510);
+  sel8.option('1');
+  sel8.option('2');
+  sel8.option('3');
+  sel8.option('4');
+  sel8.option('5');
 
-    sel9 = createSelect();
-    sel9.position(500, 600);
-    sel9.option('1');
-    sel9.option('2');
-    sel9.option('3');
-    sel9.option('4');
-    sel9.option('5');
+  sel9 = createSelect();
+  sel9.position(430, 580);
+  sel9.option('1');
+  sel9.option('2');
+  sel9.option('3');
+  sel9.option('4');
+  sel9.option('5');
 
-     sel5.changed(mySelectEvent2);
-     sel6.changed(mySelectEvent2);
-     sel7.changed(mySelectEvent2);
-     sel8.changed(mySelectEvent2);
-     sel9.changed(mySelectEvent2);
+ sel5.changed(mySelectEvent2);
+ sel6.changed(mySelectEvent2);
+ sel7.changed(mySelectEvent2);
+ sel8.changed(mySelectEvent2);
+ sel9.changed(mySelectEvent2);
 
-  function mySelectEvent2(){
-    var step5 = sel5.value();
-    var step6 = sel6.value();
-    var step7 = sel7.value();
-    var step8 = sel8.value();
-    var step9 = sel9.value();
+function mySelectEvent2(){
+  var step5 = sel5.value();
+  var step6 = sel6.value();
+  var step7 = sel7.value();
+  var step8 = sel8.value();
+  var step9 = sel9.value();
 
     if (step5 == 2 && step6 ==4 && step7 ==5 && step8 ==1 && step9 ==3){
         button8.mousePressed(success2);
@@ -378,7 +433,7 @@ function lesson2(){
         button8.mousePressed(failure2);
       }
     }
-  }
+}
 
   function success2() {
     button8.hide();
@@ -397,9 +452,13 @@ function lesson2(){
     fill(255,218,185);
     rect(30, 40, 1277, 571);
 
-    textSize(30);
-    fill(0,0,0);
-    text(text1,740, 520);
+    success_title1 = "You have succeeded"
+    textSize(100);
+    text(success_title1,650,100);
+
+    cry_createimg.hide();
+    bad2_createimg.show();
+    cheer_createimg.show();
   }
 
   function failure2() {
@@ -416,17 +475,21 @@ function lesson2(){
     button9.mousePressed(lesson3);
 
     background('#222222');
-    fill(255,218,185);
-    rect(30, 40, 1277, 571);
 
-    textSize(30);
-    fill(0,0,0);
-    text(text2,740, 520);
+    fail_title1 = "You Failed"
+    textSize(80);
+    fill(255,218,185);
+    text(fail_title1,650,100);
+
+    cry_createimg.show();
 
   }
 
 function lesson3(){
     button9.hide();
+    cheer_createimg.hide();
+    bad2_createimg.hide();
+    cry_createimg.hide();
 
     button10 = createButton("-->")
     button10.position(1200,570);
@@ -437,12 +500,13 @@ function lesson3(){
     fill(255,218,185);
     rect(30, 40, 1277, 571);
 
-    title4= "Lesson 3"
+    title6= "Lesson 3"
+    textSize(60);
     textAlign("center");
     fill(0,0,0);
-    text(title4,660, 120);
+    text(title6,660, 120);
 
-    vid3 = createVideo ("lesson3.mp4");
+    vid3.show();
     vid3.volume(0);
     vid3.size(700, 600);
     vid3.position(320,75);
@@ -450,52 +514,58 @@ function lesson3(){
     vid3.loop();
 
     }
+function game3(){
+  vid3.hide();
+  button10.hide();
 
-function game3 (){
-      button10.hide()
-      vid3.hide()
+  button11 = createButton("-->")
+  button11.position(1200,570);
+  button11.size(100,40);
+
       background('#222222');
       fill(255,218,185);
       rect(30, 40, 1277, 571);
 
-      button11= createButton("-->")
-      button11.position(1200,570);
-      button11.size(100,40);
+      title7 = "Lesson 3 Game"
+          textAlign("center");
+          textSize(60);
+          fill(0,0,0);
+          text(title7,660, 120);
 
-      title5 = "Lesson 3 Game"
+      scenario3 = "An attacker grabs your neck and tries to choke you. \n Put the steps in order to escape the attacker's choke. "
       textAlign("center");
-      fill(0,0,0);
-      text(title5,660, 120);
-
-      scenario3 = "An attacker grabs your neck and tries to choke you. /n Put the steps in order to escape the attacker's choke. "
-      textAlign("center");
+      textStyle("normal");
       textSize(30);
       fill(0,0,0);
       text(scenario3,660,165);
 
-      option10 = "crunch downwards, trapping the attacker's hand"
+      option10 = "crunch downwards, trapping \n the attacker's hand"
       textSize(30);
+      textStyle("normal");
       fill(0,0,0);
-      text(option10,750,290);
+      text(option10,750,262);
 
       option11 = "strike elbow to attacker's face"
       textSize(30);
+      textStyle("normal");
       fill(0,0,0);
-      text(option11,750, 380);
+      text(option11,750, 370);
 
       option12 = "turn whole body to opposite side"
       textSize(30);
+      textStyle("normal");
       fill(0,0,0);
-      text(option12,750, 470);
+      text(option12,750, 451);
 
       option13 = "lift one arm up"
       textSize(30);
+      textStyle("normal");
       fill(0,0,0);
-      text(option13,740, 520);
+      text(option13,740, 533);
 
 
       sel10 = createSelect();
-      sel10.position(500, 290);
+      sel10.position(470,265);
       sel10.option('1');
       sel10.option('2');
       sel10.option('3');
@@ -503,21 +573,21 @@ function game3 (){
 
 
       sel11 = createSelect();
-      sel11.position(500, 380);
+      sel11.position(470, 362);
       sel11.option('1');
       sel11.option('2');
       sel11.option('3');
       sel11.option('4');
 
       sel12 = createSelect();
-      sel12.position(500, 450);
+      sel12.position(470, 445);
       sel12.option('1');
       sel12.option('2');
       sel12.option('3');
       sel12.option('4');
 
       sel13 = createSelect();
-      sel13.position(500, 520);
+      sel13.position(470, 523);
       sel13.option('1');
       sel13.option('2');
       sel13.option('3');
@@ -560,9 +630,13 @@ function game3 (){
       fill(255,218,185);
       rect(30, 40, 1277, 571);
 
-      textSize(30);
-      fill(0,0,0);
-      text(text1,740, 520);
+      success_title2 = "You have succeeded"
+      textSize(100);
+      text(success_title2,650,100);
+
+      cry_createimg.hide();
+      bad2_createimg.show();
+      cheer_createimg.show();
     }
 
     function failure3() {
@@ -578,17 +652,21 @@ function game3 (){
       button12.mousePressed(lesson4);
 
       background('#222222');
-      fill(255,218,185);
-      rect(30, 40, 1277, 571);
 
-      textSize(30);
-      fill(0,0,0);
-      text(text2,740, 520);
+      fail_title2 = "You Failed"
+      textSize(80);
+      fill(255,218,185);
+      text(fail_title2,650,100);
+
+      cry_createimg.show();
 
     }
 
 function lesson4(){
     button12.hide();
+    cheer_createimg.hide();
+    bad2_createimg.hide();
+    cry_createimg.hide();
 
     button13 = createButton("-->")
     button13.position(1200,570);
@@ -599,12 +677,13 @@ function lesson4(){
     fill(255,218,185);
     rect(30, 40, 1277, 571);
 
-    title6= "Lesson 4"
+    title8= "Lesson 4"
+    textSize(60);
     textAlign("center");
     fill(0,0,0);
-    text(title6,660, 120);
+    text(title8,660, 120);
 
-    vid4 = createVideo ("lesson4.mp4");
+    vid4.show();
     vid4.volume(0);
     vid4.size(700, 600);
     vid4.position(320,75);
@@ -629,7 +708,7 @@ function game4 (){
   fill(0,0,0);
   text(title7,660, 120);
 
-  scenario4 = "You are waiting at a bus stop when a stranger grabs your hair. /n Put the steps in order to escape the attacker's hold. "
+  scenario4 = "You are waiting at a bus stop when a stranger grabs your hair. \n Put the steps in order to escape the attacker's hold. "
   textAlign("center");
   textSize(30);
   fill(0,0,0);
@@ -638,46 +717,46 @@ function game4 (){
   option14 = "go under the arm and up and around"
   textSize(30);
   fill(0,0,0);
-  text(option10,750,290);
+  text(option14,740,290);
 
   option15 = "squeeze elbows in to protect the face"
   textSize(30);
   fill(0,0,0);
-  text(option11,750, 380);
+  text(option15,740, 370);
 
   option16 = "lock both hands on top of the attacker's hands"
   textSize(30);
   fill(0,0,0);
-  text(option12,750, 470);
+  text(option16,770, 450);
 
-  option17 = "when unraveled, push attacker's arm forward /n and up to dislocate shoulder"
+  option17 = "when unraveled, push attacker's arm forward \n and up to dislocate shoulder"
   textSize(30);
   fill(0,0,0);
-  text(option13,740, 520);
+  text(option17,760, 520);
 
   sel14 = createSelect();
-  sel14.position(500, 520);
+  sel14.position(450, 280);
   sel14.option('1');
   sel14.option('2');
   sel14.option('3');
   sel14.option('4');
 
   sel15 = createSelect();
-  sel15.position(500, 290);
+  sel15.position(450, 360);
   sel15.option('1');
   sel15.option('2');
   sel15.option('3');
   sel15.option('4');
 
   sel16 = createSelect();
-  sel16.position(500, 380);
+  sel16.position(450, 440);
   sel16.option('1');
   sel16.option('2');
   sel16.option('3');
   sel16.option('4');
 
   sel17 = createSelect();
-  sel17.position(500, 450);
+  sel17.position(450, 510);
   sel17.option('1');
   sel17.option('2');
   sel17.option('3');
@@ -694,7 +773,7 @@ function mySelectEvent4(){
   var step16 = sel16.value();
   var step17 = sel17.value();
 
-  if (step14 == 3 && step15 ==2 && step16 ==1 && step17 ==4){
+  if (step14 == 3 && step15 == 2 && step16 == 1 && step17 == 4){
       button14.mousePressed(success4);
   }
   else {
@@ -719,9 +798,13 @@ function success4() {
   fill(255,218,185);
   rect(30, 40, 1277, 571);
 
-  textSize(30);
-  fill(0,0,0);
-  text(text1,740, 520);
+  success_title3 = "You have succeeded"
+  textSize(100);
+  text(success_title3,650,100);
+
+  cry_createimg.hide();
+  bad2_createimg.show();
+  cheer_createimg.show();
 }
 
 function failure4() {
@@ -737,17 +820,20 @@ function failure4() {
   button15.mousePressed(citations);
 
   background('#222222');
-  fill(255,218,185);
-  rect(30, 40, 1277, 571);
 
-  textSize(30);
-  fill(0,0,0);
-  text(text2,740, 520);
+  fail_title3 = "You Failed"
+  textSize(80);
+  fill(255,218,185);
+  text(fail_title3,650,100);
+
+  cry_createimg.show();
 
 }
 
 function citations(){
     button15.hide();
+    cry_createimg.hide();
+    cheer_createimg.hide();
 
     background('#222222');
     fill(255,218,185);
@@ -758,14 +844,17 @@ function citations(){
      button16.size(100,40);
      button16.mousePressed(resources1);
 
-    title8 = "Citations"
-    text(title8, 660, 120);
+     title8 = "Citations"
+     textAlign("center");
+     textSize(60);
+     fill(0,0,0);
+     text(title8,660, 120);
 
     textSize(30);
     fill(0,0,0);
     textAlign("center");
-    cite= "Video: /n   Buzzfeed: “Simple Self-Defense Moves You Should Know” /n Statistics: /n https://www.rainn.org/statistics/scope-problem /n https://www.nsvrc.org/sites/default/files/publications_nsvrc_factsheet_media-packet_statistics-about-sexual-violence_0.pdf /n Music: /n plosko- fight1.mp3 http://freesound.org/people/plosko/sounds/189648"
-    text(cite, 650, 230);
+    cite= "Video: \n   Buzzfeed: Simple Self-Defense Moves You Should Know \n Statistics: \n https://www.rainn.org/statistics/scope-problem \n https://www.nsvrc.org/sites/default/files/publications_nsvrc_factsheet \n _media-packet_statistics-about-sexual-violence_0.pdf \n Music: \n Katy Perry- Roar"
+    text(cite, 660, 200);
 }
 
 function resources1(){
@@ -780,14 +869,17 @@ function resources1(){
      button17.size(100,40);
      button17.mousePressed(resources2);
 
-    title9 = "Resources"
-    text(title9, 660, 120);
+     title11 = "Resources"
+     textSize(60);
+     textAlign("center");
+     fill(0,0,0);
+     text(title11,660, 120);
 
     textSize(30);
     fill(0,0,0);
     textAlign("center");
-    resource1= "More self defense lessons and tips: /n http://www.shieldselfdefense.com/ /n http://www.womensselfdefense-seps.com /n http://lifehacker.com/5825528/basic-self-defense-moves-anyone-can-do-and-everyone-should-know /n http://kidshealth.org/en/teens/self-defense.html"
-    text(resource1, 660, 140);
+    resource1= "More self defense lessons and tips: \n http://www.shieldselfdefense.com/ \n http://www.womensselfdefense-seps.com \n http://lifehacker.com/5825528/basic-self-defense-moves-anyone-can-do-and-everyone-should-know \n http://kidshealth.org/en/teens/self-defense.html"
+    text(resource1, 660, 200);
 }
 
 function resources2() {
@@ -802,14 +894,17 @@ function resources2() {
      button18.size(100,40);
      button18.mousePressed(about);
 
-     title10 = "Resources (cont.)"
-     text(title10, 660, 120);
+     title12 = "Resources (cont.)"
+     textAlign("center");
+     textSize(60);
+     fill(0,0,0);
+     text(title12,660, 120);
 
      textSize(30);
      fill(0,0,0);
      textAlign("center");
-     resource2= "Victim help: /n National Sexual Assault Hotline: 800-656-HOPE (4673) /n National Domestic Violence Hotline: 1-800-799-7233 or 1-800-787-3224 (TTY) /n Online Directory of Crime Victim Services: http://ovc.ncjrs.gov/findvictimservices/ /n National Resources for Sexual Assault Survivors and their Loved Ones: https://www.rainn.org/national-resources-sexual-assault-survivors-and-their-loved-ones /n Bulletins for Teens: Assault http://victimsofcrime.org/help-for-crime-victims/get-help-bulletins-for-crime-victims/bulletins-for-teens/assault /n Options for Victims http://victimsofcrime.org/help-for-crime-victims/get-help-bulletins-for-crime-victims/options-for-victims /n"
-     text(resouce2, 660, 140);
+     resource2= "Victim help: \n National Sexual Assault Hotline: 800-656-HOPE (4673) \n National Domestic Violence Hotline: 1-800-799-7233 or 1-800-787-3224 (TTY) \n Online Directory of Crime Victim Services: http://ovc.ncjrs.gov/findvictimservices/ \n National Resources for Sexual Assault Survivors and their Loved Ones: \n  https://www.rainn.org/national-resources-sexual-assault-survivors-and-their-loved-ones \n Bulletins for Teens: Assault \n http://victimsofcrime.org/help-for-crime-victims/get-help-bulletins-for-crime-victims/ \n bulletins-for-teens/assault \n Options for Victims: \n http://victimsofcrime.org/help-for-crime-victims/get-help-bulletins-for-crime-victims/ \n options-for-victims \n"
+     text(resource2, 660, 180);
 }
 
 function about() {
@@ -819,13 +914,16 @@ function about() {
     fill(255,218,185);
     rect(30, 40, 1277, 571);
 
-    title11 = "About the creators"
-    text(title11, 660, 120);
+    title13 = "About Us"
+    textSize(60);
+    textAlign("center");
+    fill(0,0,0);
+    text(title13,660, 120);
 
      textSize(30);
      fill(0,0,0);
 
-     info3= "Girls Who Code students who wanted to combat increasing cases of assault through teaching self defense. /n Caitlin Hall /n  Uzma Kapadia /n Michelle Li /n Anjana Thomas"
-     text(info3, 660, 140);
+     info3= "Hi! We are four Girls Who Code students who wanted to combat \n increasing cases of assault by teaching self defense. \n Creators: \n Caitlin Hall \n  Uzma Kapadia \n Michelle Li \n Anjana Thomas"
+     text(info3, 660, 220);
 
 }
