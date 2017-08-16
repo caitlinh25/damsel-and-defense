@@ -249,7 +249,6 @@ function success1() {
   button6.mousePressed(lesson2);
 
   background('#222222');
-  fill(255,218,185);
 
   success_title = "You have succeeded"
   textSize(100);
@@ -449,8 +448,6 @@ function mySelectEvent2(){
     button9.mousePressed(lesson3);
 
     background('#222222');
-    fill(255,218,185);
-    rect(30, 40, 1277, 571);
 
     success_title1 = "You have succeeded"
     textSize(100);
@@ -627,8 +624,7 @@ function game3(){
       button12.mousePressed(lesson4);
 
       background('#222222');
-      fill(255,218,185);
-      rect(30, 40, 1277, 571);
+
 
       success_title2 = "You have succeeded"
       textSize(100);
@@ -795,10 +791,8 @@ function success4() {
   button15.mousePressed(citations);
 
   background('#222222');
-  fill(255,218,185);
-  rect(30, 40, 1277, 571);
 
-  success_title3 = "You have succeeded"
+  title3 = "You have succeeded"
   textSize(100);
   text(success_title3,650,100);
 
